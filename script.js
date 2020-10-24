@@ -64,10 +64,16 @@ function init() {
 
   let timer;
 
-  const playerSize = 20;
+  const playerSize = 15;
   function drawPlayer(x, y) {
     gl.scissor(x, y, playerSize, playerSize);
     gl.clearColor(1, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+
+  function drawEnemy(x, y) {
+    gl.scissor(x, y, 15, 40);
+    gl.clearColor(1, 1, 1, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
   }
 
@@ -146,13 +152,21 @@ function init() {
     // gl.drawingBufferHeight - 10,
   ];
 
-  const playerVelocity = 200;
-  let gravity = 3;
+  let enemyPos = [
+    gl.drawingBufferWidth / 2 - playerSize / 2,
+    // gl.drawingBufferHeight / 2 - playerSize / 2,
+    0,
+    // gl.drawingBufferHeight - 10,
+  ];
+
+  const playerVelocity = 220;
+  let gravity = 5;
   let yVel = 0;
   let then = 0;
   let elapsedJumpingTime = 0;
   let onGround = true;
   let timeSpentJumping = 0;
+  let isColliding = false;
   function draw(now) {
     // to seconds
     now *= 0.001;
@@ -198,9 +212,8 @@ function init() {
 
     timeSpentJumping = onGround ? 0 : timeSpentJumping + deltaTime;
     if (isJumping) {
-      console.log(timeSpentJumping);
-      if (timeSpentJumping < 0.3) {
-        yVel = 200;
+      if (timeSpentJumping < 0.35) {
+        yVel = 180;
       }
       // console.log("now", now);
     }
@@ -210,7 +223,35 @@ function init() {
     // }
     // playerPos[1] += yAxis * velocity;
 
+    let playerRect = {
+      x: playerPos[0],
+      y: playerPos[1],
+      width: playerSize,
+      height: playerSize,
+    };
+    let enemyRect = {
+      x: enemyPos[0],
+      y: enemyPos[1],
+      width: 15,
+      height: 40,
+    };
+
+    if (
+      playerRect.x < enemyRect.x + enemyRect.width &&
+      playerRect.x + playerRect.width > enemyRect.x &&
+      playerRect.y < enemyRect.y + enemyRect.height &&
+      playerRect.y + playerRect.height > enemyRect.y
+    ) {
+      isColliding = true;
+    } else {
+      isColliding = false;
+    }
+
+    drawEnemy(enemyPos[0], enemyPos[1]);
     drawPlayer(playerPos[0], playerPos[1]);
+
+    console.log(isColliding);
+
     requestAnimationFrame(draw);
   }
 
