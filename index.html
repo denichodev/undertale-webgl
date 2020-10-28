@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Undertale with WebGL</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+  <script type="module" src="src/init.js"></script>
 </head>
 <body>
+  <p>Welcome to Undertale wannabe fighting mechanism in WebGL!</p>
+  <p>Use your <strong>left</strong> or <strong>right</strong> arrow to move horizontally.</p>
+  <p>Use your <strong>up</strong> arrow to jump! The longer you hold the <strong>up</strong> arrow, the higher you jump.</p>
+  <p>Feel free to move around first, after you're ready, click the <strong>start</strong> button to spawn the enemies!</p>
+
   <canvas id="webgl-canvas">Your browser does not support HTML5 Canvas</canvas>
-  <button id="control-button">Button</button>
+  <p id="error-container"></p>
+  <p id="message-container"></p>
+  <button id="control-button" type="button">Start</button>
   <p></p>
 
+  <audio controls id="music">
+    <source src="assets/sawsquarenoise_-_03_-_Towel_Defence_Ingame.mp3" type="audio/mpeg">  
+  </audio>
+  <p>Music by <a href="https://freemusicarchive.org/music/sawsquarenoise">sawsquarenoise</a></p>
 </body>
 </html>
