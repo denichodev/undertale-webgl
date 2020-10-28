@@ -1,5 +1,7 @@
 # Undertale WebGL
 
+![](undertale.gif)
+
 Undertale WebGL - An undertale fighting mechanics wannabe, made in WebGL. If you don't know Undertale (you missed out a great game),
 please see [this video](https://youtu.be/6RL6JcEHw2U?t=130) which showcase how the fighting mechanics in Undertale works.
 
