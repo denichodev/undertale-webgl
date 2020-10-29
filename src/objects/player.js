@@ -151,7 +151,7 @@ export class Player {
     } else if (against.tag === "finishpoint") {
       game.stop();
       const messageContainer = document.getElementById("message-container");
-      messageContainer.innerText = "You won!";
+      messageContainer.innerText = "You win!";
 
       const controlButton = document.getElementById("control-button");
       controlButton.innerText = "Reload";
